@@ -2,28 +2,10 @@ import React, {useState}  from 'react';
 import AddList from './AddList';
 import List from './List';
 import ListSelect from './ListSelect';
-
-const initList = [
-  {
-    name: 'Add new list by enter the name',
-    isComplete: false
-  },
-  {
-    name: '<-- Check this if complete',
-    isComplete: false
-  },
-  {
-    name: 'Click this to delete -->',
-    isComplete: false
-  },
-  {
-    name: 'Select options below to filter lists',
-    isComplete: false
-  },
-]
+import {initLists} from './initLists';
 
 const Content = () => {
-  const [lists, setLists] = useState(initList);
+  const [lists, setLists] = useState(initLists);
   const [listType, setListType] = useState('incomplete');
 
   const addList = name => {
