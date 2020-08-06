@@ -1,13 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Checkbox, Icon } from 'semantic-ui-react';
 
-export default function List({name, isComplete, deleteList, toggleIsCompleteList}) {
+import { ListContext } from '../context/listContext';
+
+export default function List({name, isComplete}) {
+	const { removeList, updateList } = useContext(ListContext)
+
 	const handleChange = e => {
-		toggleIsCompleteList(name);
+		updateList(name);
 	}
 
 	const handleClick = () => {
-		deleteList(name);
+		removeList(name);
 	}
 
 	return (

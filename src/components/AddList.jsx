@@ -1,9 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { Button, Icon, Input } from 'semantic-ui-react';
 
-const AddList = ({addList}) => {
+import { ListContext } from '../context/listContext';
+
+const AddList = () => {
 	const [toggle, setToggle] = useState(false);
 	const [input, setInput] = useState("");
+
+	const { addList } = useContext(ListContext);
 
 	const handleChange = e => {
 		const {value} = e.target;
@@ -35,4 +39,4 @@ const AddList = ({addList}) => {
 	)
 }
 
-export default AddList
+export default AddList;

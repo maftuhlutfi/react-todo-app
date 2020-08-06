@@ -1,5 +1,7 @@
-import React from 'react'
-import { Dropdown } from 'semantic-ui-react'
+import React, {useContext} from 'react';
+import { Dropdown } from 'semantic-ui-react';
+
+import { ListContext } from '../context/listContext';
 
 const listOptions = [
   { key: 'all', value: 'all', text: 'all' },
@@ -7,7 +9,9 @@ const listOptions = [
   { key: 'incomplete', value: 'incomplete', text: 'incomplete', selected: true },
 ]
 
-const ListSelect = ({setListType}) => {
+const ListSelect = () => {
+  const { setListType } = useContext(ListContext);
+
   const handleChange = e => {
     setListType(e.target.innerText);
   }
@@ -26,4 +30,4 @@ const ListSelect = ({setListType}) => {
   )
 }
 
-export default ListSelect
+export default ListSelect;

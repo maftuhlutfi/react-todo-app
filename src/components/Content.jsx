@@ -1,28 +1,12 @@
-import React, {useState}  from 'react';
+import React, {useContext}  from 'react';
 import AddList from './AddList';
 import List from './List';
 import ListSelect from './ListSelect';
-import {initLists} from './initLists';
+
+import { ListContext } from '../context/listContext';
 
 const Content = () => {
-  const [lists, setLists] = useState(initLists);
-  const [listType, setListType] = useState('incomplete');
-
-  const addList = name => {
-    setLists(prev => [...prev, {name: name, isComplete: false}]);
-  }
-
-  const deleteList = name => {
-    setLists(prev => prev.filter(list => list.name !== name));
-  }
-
-  const toggleIsCompleteList = name => {
-    const newLists = [...lists];
-    const index = lists.map(list => list.name).indexOf(name);
-
-    newLists[index].isComplete = !newLists[index].isComplete;
-    setLists(newLists);
-  }
+  const { lists, listType } = useContext(ListContext);
 
   const showList = () => {
     switch (listType) {
@@ -32,8 +16,6 @@ const Content = () => {
                       key={index}
                       name={list.name} 
                       isComplete={list.isComplete}
-                      deleteList={deleteList} 
-                      toggleIsCompleteList={toggleIsCompleteList} 
                     />
                     );
             case 'completed':
@@ -42,8 +24,6 @@ const Content = () => {
                       key={index} 
                       name={list.name} 
                       isComplete={list.isComplete}
-                      deleteList={deleteList} 
-                      toggleIsCompleteList={toggleIsCompleteList} 
                     />
                     );
             case 'incomplete':
@@ -52,8 +32,6 @@ const Content = () => {
                       key={index} 
                       name={list.name} 
                       isComplete={list.isComplete}
-                      deleteList={deleteList} 
-                      toggleIsCompleteList={toggleIsCompleteList} 
                     />
                     );
             default: return null;
@@ -62,11 +40,11 @@ const Content = () => {
 
   return (
     <div className="list-container">
-      <AddList addList={addList} />
+      <AddList />
       <div className="list-item-container">
         {showList()}
       </div>
-      <ListSelect setListType={setListType} />
+      <ListSelect />
     </div>
   )
 }
